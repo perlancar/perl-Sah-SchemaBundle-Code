@@ -45,7 +45,7 @@ sub filter {
 }
 
 1;
-# ABSTRACT: Convert string to regex if string is delimited by /.../ or qr(...)
+# ABSTRACT: Eval a string inside 'sub { ... }' and return a coderef
 
 =for Pod::Coverage ^(meta|filter)$
 
