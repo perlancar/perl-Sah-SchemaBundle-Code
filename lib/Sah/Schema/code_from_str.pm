@@ -21,6 +21,13 @@ By default `eval()` is performed in the `main` namespace and without stricture
 or warnings. See the parameterized version <pm:Sah::PSchema::code_from_str> if
 you want to customize the `eval()`.
 
+What's the difference between this schema and `str_or_code` (from
+<pm:Sah::Schemas::Str>)? Both this schema and `str_or_code` accept string, but
+this schema will directly compile any input string while `str_or_code` will only
+convert string to code if it is in the form of `sub { ... }`. In other words,
+this schema will always produce coderef, while `str_or_code` can produce strings
+also.
+
 MARKDOWN
 
         prefilters => [ ['Code::eval'=>{}] ],
