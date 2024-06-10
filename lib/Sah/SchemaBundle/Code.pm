@@ -1,4 +1,4 @@
-package Sah::Schemas::Code;
+package Sah::SchemaBundle::Code;
 
 use strict;
 
@@ -12,9 +12,9 @@ use strict;
 
 =head1 append:SEE ALSO
 
-L<Sah::PSchemas::Code>
+L<Sah::PSchemaBundle::Code>
 
-=head2 Related Sah schemas from L<Sah::Schemas::Str> distribution
+=head2 Related Sah schemas from L<Sah::SchemaBundle::Str> distribution
 
 L<Sah::Schema::str_or_code>
 
