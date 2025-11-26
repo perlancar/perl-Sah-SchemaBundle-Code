@@ -1,4 +1,4 @@
-package Data::Sah::Filter::perl::Code::eval;
+package Data::Sah::Filter::perl::Code::eval_local_topic;
 
 use strict;
 use warnings;
@@ -11,7 +11,7 @@ use warnings;
 sub meta {
     +{
         v => 1,
-        summary => "Eval a string inside 'sub { ... }' and return a coderef",
+        summary => q[Eval a string inside 'sub { local $_ = $_; ...; return $_ }' and return a coderef],
         might_fail => 1,
         args => {
             # XXX use strict?
@@ -33,9 +33,9 @@ sub filter {
         "do {", (
             "my \$tmp = $dt; ",
             "if (ref \$tmp eq 'CODE') { ", (
-                "[undef, \$tmp] "),
+                "[undef, sub { local \$_=\$_; \$tmp->(); return $_}] "),
             "} else { ", (
-                "my \$code = eval qq(package main; sub { \$tmp }); if (\$@) { [\"Error in compiling code: \$@\", \$tmp] } else { [undef, \$code] } ",
+                "my \$code = eval qq(package main; sub { local \$_=\$_; \$tmp; return \$_ }); if (\$@) { [\"Error in compiling code: \$@\", \$tmp] } else { [undef, \$code] } ",
                 "}"),
         ),
         "}",
@@ -45,7 +45,7 @@ sub filter {
 }
 
 1;
-# ABSTRACT: Eval a string inside 'sub { ... }' and return a coderef
+# ABSTRACT: Eval a string inside 'sub { local $_ = $_; ...; return $_ }' and return a coderef
 
 =for Pod::Coverage ^(meta|filter)$
 
